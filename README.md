@@ -1,6 +1,6 @@
 # Live Hindustan Clone - Next.js Assignment Submission
 
-**Name:** Geetanshu Kumar Kushwaha 
+**Name:** [Geetanshu Kumar Kushwaha] 
 **Course:** B.Tech CSE (Final Year)  
 **Subject:**  Next.js Assignment
 
