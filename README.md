@@ -1,40 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# Live Hindustan Clone - Next.js Assignment Submission
 
-## Getting Started
+**Name:** Geetanshu Kumar Kushwaha 
+**Course:** B.Tech CSE (Final Year)  
+**Subject:**  Next.js Assignment
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📝 Project Overview
+For this assignment, I built a simplified front-page clone of the *LiveHindustan* news portal. The goal was to demonstrate core Next.js concepts like **Dynamic Routing**, **ISR (Incremental Static Regeneration)**, and **Image Optimization** in a real-world scenario.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I focused on making the UI clean and responsive (Mobile + Desktop) while ensuring the backend logic for data fetching is solid.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 🚀 Key Features
+* **Hero Section:** Highlights the top story with a gradient overlay (looks like the real site).
+* **Responsive Grid:** Switches from a 3-column layout on laptops to a vertical stack on mobile.
+* **Dynamic News Pages:** Clicking any card routes you to `/news/[id]` where the full article loads.
+* **Trending Sidebar:** A static sidebar to give that "busy news portal" feel.
+* **Robust Error Handling:** The app doesn't crash if data is missing or images fail to load.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🛠️ Tech Stack & Decisions
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Next.js (Pages Router)
+I chose the **Pages Router** over the App Router because the assignment specifically asked for `getStaticProps`. It was a good refresher on how Next.js handles server-side logic before rendering.
 
-## Learn More
+### 2. Data Fetching: ISR
+I used **Incremental Static Regeneration (ISR)** with `revalidate: 60`.
+* *Why?* A news site needs to be fast (static HTML) but can't be stale.
+* *Trade-off:* SSR would be too slow for every request, and pure Static Generation would require a full rebuild for every breaking news. ISR is the perfect middle ground.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Styling: Tailwind CSS
+Used Tailwind to quickly prototype the grid layouts. It made handling the responsive "hidden md:block" logic for the sidebar very easy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### 4. Mock Data vs Real API
+I decided to use a **local JSON mock file** (`src/data/mockNews.js`) instead of an external API (like NewsAPI).
+* *Reason:* Public APIs often have strict rate limits that block you during development testing. Mock data allowed me to test specific edge cases (like long titles or missing summaries) without worrying about API keys expiring.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🐛 Challenges & Learning Function
+**1. The "Project inside a Project" Mess:**
+At the start, I accidentally initialized the Next.js app inside my assignment folder, creating a nested structure. This caused "Module not found" errors. I fixed this by restructuring the `src` folder and moving components to the correct level.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**2. Image Optimization Issues:**
+Next.js `<Image />` component is strict! It blocked my Unsplash URLs initially. I had to learn how to configure `next.config.mjs` to whitelist the `images.unsplash.com` domain.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## 🤖 AI Usage & Reflection (Part D)
+
+I used AI tools (like ChatGPT/Gemini) to speed up the development process. Here is the breakdown:
+
+* **What AI did well:**
+    * Generating the **Mock Data**: Writing 5 fake news articles with titles, dates, and summaries is boring. AI generated the JSON array instantly.
+    * **Tailwind Classes:** I asked AI for "a 3-column grid that collapses on mobile," and it gave me the `grid-cols-1 md:grid-cols-3` logic, which saved time.
+
+* **Where AI failed / I had to step in:**
+    * **Folder Structure:** The AI assumed a generic folder structure. It didn't know I was using `src/` directory preferences, so I had to manually fix the import paths (`../components/` vs `./components/`).
+    * **Broken Images:** The AI initially gave me placeholder image URLs that timed out. I had to manually go to Unsplash, find working image links, and update the data file myself.
+
+---
+
+## 🧪 How to Run
+1.  Clone the repo.
+2.  Install dependencies: `npm install`
+3.  Run the dev server: `npm run dev`
+4.  Open `http://localhost:3000`
